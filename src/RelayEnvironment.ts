@@ -23,6 +23,10 @@ const fetchFn: FetchFunction = async (request, variables) => {
     }),
   });
 
+  if (!resp.ok) {
+    throw new Error(`Network response was not ok: ${resp.statusText}`);
+  }
+
   return await resp.json();
 };
 
