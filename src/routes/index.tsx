@@ -5,7 +5,8 @@ import Login from "../Login";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />
+        element: <App />,
+        
     },
     {
         path: '/login',
