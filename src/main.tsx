@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
-import router from "./routers/index.tsx";
+import router from "./routes/index.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <RelayEnvironmentProvider environment={RelayEnvironment}>
