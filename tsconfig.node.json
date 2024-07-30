@@ -9,5 +9,8 @@
     "strict": true,
     "noEmit": true
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": ["vite.config.ts"]
 }
