@@ -403,7 +403,7 @@ type Mutation {
   createUser(user: CreateUserPayload!): AuthUser
   updateUser(user: UpdateUserPayload!, id: ID!): User
   deleteUser(id: ID!): Boolean
-  login(email: String!, password: String!): AuthUser
+  login(input: LoginInput!): AuthUser
   logout: Boolean
 }
 
@@ -513,4 +513,9 @@ input UpdateUserPayload {
   birthdate: String
   gender: UserEnum
   role: UserRoleEnum
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
