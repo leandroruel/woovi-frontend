@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a0ddc3ae6dffa75ec3ce1f0e6dc6100c>>
+ * @generated SignedSource<<21da5deeb6689ef8c66766a3e0202584>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,7 +14,7 @@ export type accountQuery$variables = {
   userId: any;
 };
 export type accountQuery$data = {
-  readonly account: {
+  readonly accountByUserId: {
     readonly " $fragmentSpreads": FragmentRefs<"accountFragment">;
   } | null | undefined;
 };
@@ -50,7 +50,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": "Account",
         "kind": "LinkedField",
-        "name": "account",
+        "name": "accountByUserId",
         "plural": false,
         "selections": [
           {
@@ -76,7 +76,7 @@ return {
         "args": (v1/*: any*/),
         "concreteType": "Account",
         "kind": "LinkedField",
-        "name": "account",
+        "name": "accountByUserId",
         "plural": false,
         "selections": [
           {
@@ -92,16 +92,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "8e399eab61910897b970c964df8df129",
+    "cacheID": "8bc84b5c7f8b92a5ebf553c9e90924bc",
     "id": null,
     "metadata": {},
     "name": "accountQuery",
     "operationKind": "query",
-    "text": "query accountQuery(\n  $userId: ObjectID!\n) {\n  account(userId: $userId) {\n    ...accountFragment\n  }\n}\n\nfragment accountFragment on Account {\n  accountNumber\n}\n"
+    "text": "query accountQuery(\n  $userId: ObjectID!\n) {\n  accountByUserId(userId: $userId) {\n    ...accountFragment\n  }\n}\n\nfragment accountFragment on Account {\n  accountNumber\n}\n"
   }
 };
 })();
 
-(node as any).hash = "1a8b86b95c2baceccea29c2599ec0938";
+(node as any).hash = "dadcd2fef82f66ef7e4b146300458649";
 
 export default node;
