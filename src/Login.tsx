@@ -30,6 +30,7 @@ const Login = () => {
   } = useForm({
     resolver: zodResolver(schema),
   });
+
   const [commit, isInFlight] = useMutation(
     graphql`
       mutation LoginMutation($input: LoginInput!) {
@@ -41,8 +42,8 @@ const Login = () => {
   );
 
   const mappedErrors: Record<string, string> = {
-    'User not found': 'Usuário não encontrado',
-  }
+    "User not found": "Usuário não encontrado",
+  };
 
   const onLogin = (input: any) => {
     if (input) {
@@ -61,8 +62,10 @@ const Login = () => {
           if (errors) {
             toast({
               title: "Login Error",
-              description: errors.map((e: any) => mappedErrors[e.message]).join(", "),
-              status: "error",
+              description: errors
+                .map((e: any) => mappedErrors[e.message])
+                .join(", "),
+
               variant: "destructive",
             });
           }
@@ -73,7 +76,6 @@ const Login = () => {
           toast({
             title: "Login Error",
             description: `An error occurred while trying to login: ${error}`,
-            status: "error",
           });
         },
       });
