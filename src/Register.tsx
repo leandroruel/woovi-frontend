@@ -46,29 +46,28 @@ const FormSchema = z
   .object({
     name: z
       .string({
-        required_error: "A name is required",
+        required_error: "O nome é obrigatório.",
       })
-      .min(3, "Name must be at least 3 characters."),
-    email: z.string({
-      required_error: "An email is required.",
-      invalid_type_error: "Invalid email address.",
+      .min(3, "Nome deve ter pelo menos 3 caracteres."),
+    email: z.string({ required_error: "E-mail é obrigatório" }).email({
+      message: "Endereço de e-mail inválido",
     }),
     password: z.string({
-      required_error: "A password is required.",
+      required_error: "A senha é obrigatória",
     }),
     confirmPassword: z.string({
-      required_error: "A password is required.",
+      required_error: "Confirmação de senha obrigatória",
     }),
     gender: z.enum(genderEnums),
     birthdate: z.date({
-      required_error: "A date of birth is required.",
+      required_error: "Uma data de nascimento é obrigatória",
     }),
     taxId: z.string({
-      required_error: "A tax ID is required.",
+      required_error: "Um CPF é obrigatório",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords must match",
+    message: "As senhas devem ser iguais",
     path: ["confirmPassword"],
   });
 
@@ -111,9 +110,10 @@ export default function Register() {
         },
         onError: (error) => {
           console.error(error);
+          const errorMessage = error.message || "Ocorreu um erro ao criar sua conta.";
           toast({
             title: "Erro ao criar conta",
-            description: "Ocorreu um erro ao criar sua conta.",
+            description: errorMessage,
             variant: "destructive",
           });
         },
@@ -124,7 +124,10 @@ export default function Register() {
   return (
     <div className="h-screen flex items-center justify-center">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full max-w-md"
+        >
           <Card className="w-full mx-auto">
             <CardHeader>
               <CardTitle>Crie sua conta</CardTitle>
