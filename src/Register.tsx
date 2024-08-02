@@ -39,6 +39,7 @@ import { withMask } from "use-mask-input";
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
 import { useToast } from "./components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const genderEnums = ["Male", "Female"] as const;
 
@@ -73,6 +74,7 @@ const FormSchema = z
 
 export default function Register() {
   const [commit, isInFlight] = useMutation(CREATE_USER);
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const defaultValues = {
@@ -90,6 +92,11 @@ export default function Register() {
     defaultValues,
   });
 
+  const mappedServerErrors: Record<string, string> = {
+    'Email already exists': 'Este e-mail já está em uso.',
+    'Document already exists': 'Este CPF já está em uso.',
+  }
+
   const onSubmit = (data: any) => {
     if (data) {
       const { confirmPassword, ...user } = data;
@@ -100,12 +107,18 @@ export default function Register() {
             const {
               createUser: { user },
             } = response;
-
-            console.log(user);
+            
+            navigate(`/register/success/${user.id}`);
           }
 
           if (errors) {
-            console.error(errors);
+            const error = errors[0];
+            const errorMessage = mappedServerErrors[error.message] || "Ocorreu um erro ao criar sua conta.";
+            toast({
+              title: "Erro ao criar conta",
+              description: errorMessage,
+              variant: "destructive",
+            });
           }
         },
         onError: (error) => {
