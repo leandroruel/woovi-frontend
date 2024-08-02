@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<18925ea02d1dc3c3c79aec9d8d25a7fe>>
+ * @generated SignedSource<<17b934853f7309739fea2f6c65423c62>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,14 +10,12 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type UserEnum = "Female" | "Male" | "%future added value";
-export type UserRoleEnum = "Admin" | "User" | "%future added value";
 export type CreateUserPayload = {
   birthdate: string;
   email: string;
   gender: UserEnum;
   name: string;
   password: string;
-  role: UserRoleEnum;
   taxId: string;
 };
 export type createUserMutation$variables = {
