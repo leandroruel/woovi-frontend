@@ -4,6 +4,7 @@ import Login from "../Login";
 import Register from "../Register";
 import ErrorBoundary from "@/ErrorBoundary";
 import PageNotFound from "@/PageNotFound";
+import RegisterSuccess from "@/RegisterSuccess";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/register/success/:userId",
+    element: <RegisterSuccess />,
     errorElement: <ErrorBoundary />,
   },
   {
