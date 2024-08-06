@@ -17,6 +17,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { LOGIN_MUTATION } from "@/graphql/login";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAuth } from "@/hooks/useAuth";
+import Logo from '@/assets/logo.svg';
 
 const Login = () => {
   const auth = useAuth();
@@ -80,7 +81,10 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex flex-col items-center justify-center">
+      <div className='w-24 mb-10'>
+        <img src={Logo} alt="logo" />
+      </div>
       <Card className="mx-auto min-w-96">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold">Bem vindo!</CardTitle>
