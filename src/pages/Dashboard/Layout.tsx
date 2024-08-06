@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { ModeToggle } from "./components/ModeToggle";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -40,34 +41,35 @@ export default function Layout({ children }: LayoutProps) {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuLink asChild>
-                <Link to="#" className="px-4 py-2 text-sm font-medium">
-                  Dashboard
+                <Link to="/" className="px-4 py-2 text-sm font-medium">
+                  Início
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="px-4 py-2 text-sm font-medium">
-                  Accounts
+                <Link to="/accounts" className="px-4 py-2 text-sm font-medium">
+                  Contas
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="px-4 py-2 text-sm font-medium">
-                  Transfers
+                <Link to="/transfers" className="px-4 py-2 text-sm font-medium">
+                  Transferências
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="px-4 py-2 text-sm font-medium">
-                  Investments
+                <Link to="/investiments" className="px-4 py-2 text-sm font-medium">
+                  Investimentos
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="px-4 py-2 text-sm font-medium">
-                  Settings
+                <Link to="/settings" className="px-4 py-2 text-sm font-medium">
+                  Configurações
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuList>
           </NavigationMenu>
         </nav>
         <div className="flex items-center gap-4">
+          <ModeToggle />
           <Button
             variant="outline"
             size="sm"
