@@ -7,6 +7,7 @@ import RegisterSuccess from "@/pages/RegisterSuccess";
 import Dashboard from "@/pages/Dashboard";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
+import Home from "@/pages/Dashboard/Home";
 
 const Routes = () => {
   const { token } = useAuth() || {};
@@ -50,22 +51,29 @@ const Routes = () => {
           path: "/",
           element: <Dashboard />,
           errorElement: <ErrorBoundary />,
-        },
-        {
-          path: "/transfer",
-          element: <div>transfer page</div>,
-          errorElement: <ErrorBoundary />,
-        },
-        {
-          path: "/transactions",
-          element: <div>transactions page</div>,
-          errorElement: <ErrorBoundary />,
-        },
-        {
-          path: "/profile",
-          element: <div>profile page</div>,
-          errorElement: <ErrorBoundary />,
-        },
+          children: [
+            {
+              path: "/",
+              element: <Home />,
+              errorElement: <ErrorBoundary />,
+            },
+            {
+              path: "/transfers",
+              element: <div>transfer page</div>,
+              errorElement: <ErrorBoundary />,
+            },
+            {
+              path: "/transactions",
+              element: <div>transactions page</div>,
+              errorElement: <ErrorBoundary />,
+            },
+            {
+              path: "/profile",
+              element: <div>profile page</div>,
+              errorElement: <ErrorBoundary />,
+            },
+          ]
+        },       
       ],
     },
   ];

@@ -11,23 +11,21 @@ interface DecodedToken {
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [commit, loadingLogout] = useMutation(LOGOUT_MUTATION);
-
-  // State to hold the authentication token
   const [token, setToken_] = useState(sessionStorage.getItem("token"));
 
-  // Function to set the authentication token
   const setToken = (newToken: SetStateAction<string | null>) => {
     setToken_(newToken);
   };
 
   const logout = () => {
+    setToken(null);
+
     // revoke the token on server
     commit({
       variables: {},
       onCompleted: () => {
         if (!loadingLogout) {
           console.log("Logout realizado com sucesso");
-          setToken(null);
         }
       },
       onError(error) {
@@ -49,7 +47,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    // Verificar o token no carregamento da página
     if (token && isTokenExpired(token)) {
       logout();
     } else if (token) {
@@ -61,7 +58,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [token]);
 
-  // Memoized value of the authentication context
   const contextValue = useMemo(
     () => ({
       token,
@@ -71,7 +67,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     [token]
   );
 
-  // Provide the authentication context to the children components
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );

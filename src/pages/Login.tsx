@@ -89,7 +89,7 @@ const Login = () => {
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-3xl font-bold">Bem vindo!</CardTitle>
           <CardDescription>
-            Entre com seu login e senha para entrar
+            Digite seu login e senha para entrar
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
