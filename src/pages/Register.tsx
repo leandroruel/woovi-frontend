@@ -38,7 +38,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { withMask } from "use-mask-input";
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
-import { useToast } from "./components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
 const genderEnums = ["Male", "Female"] as const;

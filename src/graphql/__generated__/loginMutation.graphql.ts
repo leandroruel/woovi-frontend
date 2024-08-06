@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7d1f0e095f393ed5b2c26f929ca6aa75>>
+ * @generated SignedSource<<c951885ad6026a35b50b69b90cf4ade5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -13,17 +13,17 @@ export type LoginInput = {
   email: string;
   password: string;
 };
-export type LoginMutation$variables = {
+export type loginMutation$variables = {
   input: LoginInput;
 };
-export type LoginMutation$data = {
+export type loginMutation$data = {
   readonly login: {
     readonly token: string;
   } | null | undefined;
 };
-export type LoginMutation = {
-  response: LoginMutation$data;
-  variables: LoginMutation$variables;
+export type loginMutation = {
+  response: loginMutation$data;
+  variables: loginMutation$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -65,7 +65,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "LoginMutation",
+    "name": "loginMutation",
     "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
@@ -74,20 +74,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "LoginMutation",
+    "name": "loginMutation",
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "005ecf2cc74bf70df4beea68694f1cc6",
+    "cacheID": "6dd57c43f36320673b94fe839ad5a5fa",
     "id": null,
     "metadata": {},
-    "name": "LoginMutation",
+    "name": "loginMutation",
     "operationKind": "mutation",
-    "text": "mutation LoginMutation(\n  $input: LoginInput!\n) {\n  login(input: $input) {\n    token\n  }\n}\n"
+    "text": "mutation loginMutation(\n  $input: LoginInput!\n) {\n  login(input: $input) {\n    token\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "7889830a4917528c51fa0e9fb32d1657";
+(node as any).hash = "6b9302beb29499b5348bccfc08a5d616";
 
 export default node;
