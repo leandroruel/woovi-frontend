@@ -1,21 +1,26 @@
-import { graphql, useMutation } from "react-relay";
+import { useMutation } from "react-relay";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
-} from "./components/ui/card";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "./components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
+import { LOGIN_MUTATION } from "@/graphql/login";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { useAuth } from "@/hooks/useAuth";
 
 const Login = () => {
+  const auth = useAuth();
+  const setToken = auth?.setToken;
   const navigate = useNavigate();
   const { toast } = useToast();
   const schema = z.object({
@@ -31,15 +36,7 @@ const Login = () => {
     resolver: zodResolver(schema),
   });
 
-  const [commit, isInFlight] = useMutation(
-    graphql`
-      mutation LoginMutation($input: LoginInput!) {
-        login(input: $input) {
-          token
-        }
-      }
-    `
-  );
+  const [commit, isInFlight] = useMutation(LOGIN_MUTATION);
 
   const mappedErrors: Record<string, string> = {
     "User not found": "Usuário não encontrado",
@@ -55,8 +52,8 @@ const Login = () => {
               login: { token },
             } = response;
 
-            sessionStorage.setItem("token", token);
-            navigate("/"); // TODO: trocar para url de dashboard
+            if (setToken) setToken(token);
+            navigate("/", { replace: true });
           }
 
           if (errors) {
@@ -82,17 +79,13 @@ const Login = () => {
     }
   };
 
-  if (isInFlight) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="h-screen flex items-center justify-center">
-      <Card className="mx-auto max-w-md">
+      <Card className="mx-auto min-w-96">
         <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-3xl font-bold">Welcome Back</CardTitle>
+          <CardTitle className="text-3xl font-bold">Bem vindo!</CardTitle>
           <CardDescription>
-            Enter your email and password to access your account.
+            Entre com seu login e senha para entrar
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -132,13 +125,20 @@ const Login = () => {
               </p>
             )}
           </div>
-          <Button
-            type="submit"
-            className="w-full"
-            onClick={handleSubmit(onLogin)}
-          >
-            Sign In
-          </Button>
+          {isInFlight ? (
+            <Button disabled className="w-full">
+              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+              Aguarde
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              className="w-full"
+              onClick={handleSubmit(onLogin)}
+            >
+              Entrar
+            </Button>
+          )}
         </CardContent>
       </Card>
     </div>

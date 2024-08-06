@@ -2,15 +2,13 @@ import { RelayEnvironmentProvider } from "react-relay";
 import { RelayEnvironment } from "./RelayEnvironment";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import '@/assets/css/globals.css'
-import { RouterProvider } from "react-router-dom";
-import router from "./routes/index.tsx";
+import "@/assets/css/globals.css";
 import { Toaster } from "./components/ui/toaster";
-
+import App from "./App";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <RouterProvider router={router} />
+      <App />
       <Toaster />
     </RelayEnvironmentProvider>
   </React.StrictMode>

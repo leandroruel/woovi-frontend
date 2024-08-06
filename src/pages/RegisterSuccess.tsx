@@ -1,17 +1,25 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Link, useParams } from "react-router-dom";
-import { useLazyLoadQuery  } from "react-relay";
-import { USER } from "./graphql/user";
+import { useLazyLoadQuery, useFragment } from "react-relay";
+import { USER } from "@/graphql/user";
+import { ACCOUNT_FRAGMENT, ACCOUNT_QUERY } from "@/graphql/account";
 
-// TODO: Add account number, error handlers and redirect to dashboard
 export default function RegisterSuccess() {
   const params = useParams<{ userId: string }>();
   const data: any = useLazyLoadQuery(
     USER,
     { id: params.userId },
-    { fetchPolicy: 'store-and-network' }
+    { fetchPolicy: "store-and-network" }
   );
+
+  const account: any = useLazyLoadQuery(
+    ACCOUNT_QUERY,
+    { userId: params.userId },
+    { fetchPolicy: "store-and-network" }
+  );
+
+  const accountData = useFragment(ACCOUNT_FRAGMENT, account.accountByUserId);
 
   if (!data) {
     return <div>Loading...</div>;
@@ -29,23 +37,27 @@ export default function RegisterSuccess() {
         <p className="mt-3 text-muted-foreground">
           Sua nova conta já está pronta e você já pode começar a usá-la.
         </p>
-        <p className="mt-3 text-muted-foreground">Bem vindo, <span className="capitalize">{data?.user?.name}</span>!</p>
+        <p className="mt-3 text-muted-foreground">
+          Bem vindo, <span className="capitalize">{data?.user?.name}</span>!
+        </p>
       </div>
       <div className="mt-10 w-full max-w-md space-y-4">
         <Card>
-          <CardContent className="grid gap-4">
+          <CardContent className="grid gap-4 pt-6">
             <div className="grid gap-1">
               <div className="text-sm font-medium text-foreground">
                 Número da conta
               </div>
-              <div className="text-lg font-bold">123456789</div>
+              <div className="text-lg font-bold">
+                {accountData.accountNumber}
+              </div>
             </div>
             <Separator />
             <div className="grid gap-1">
               <div className="text-sm font-medium text-foreground">
-                Routing Number
+                E-mail
               </div>
-              <div className="text-lg font-bold">987654321</div>
+              <div className="text-lg font-bold">{data?.user?.email}</div>
             </div>
           </CardContent>
         </Card>

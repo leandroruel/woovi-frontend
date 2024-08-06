@@ -1,10 +1,11 @@
-import Home from "./Home";
+import AuthProvider from "@/providers/AuthProvider";
+import Routes from "./routes";
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 
