@@ -6,6 +6,33 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+interface InvestmentItemProps {
+  name: string;
+  invested: string;
+  value: string;
+  change: string;
+}
+
+function InvestmentItem({
+  name,
+  invested,
+  value,
+  change,
+}: InvestmentItemProps) {
+  return (
+    <div className="flex items-center justify-between">
+      <div>
+        <div className="font-medium text-primary">{name}</div>
+        <div className="text-sm text-secondary-foreground">{invested}</div>
+      </div>
+      <div className="text-right">
+        <div className="font-medium text-primary">{value}</div>
+        <div className="text-sm text-green-600">{change}</div>
+      </div>
+    </div>
+  );
+}
+
 export default function InvestmentPortfolio() {
   return (
     <Card className="col-span-2 lg:col-span-1">
@@ -17,42 +44,24 @@ export default function InvestmentPortfolio() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="font-medium text-primary">S&P 500 Index Fund</div>
-              <div className="text-sm text-secondary-foreground">
-                $5,000 invested
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="font-medium text-primary">$6,250.00</div>
-              <div className="text-sm text-green-600">+25% YTD</div>
-            </div>
-          </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="font-medium text-primary">Tech Sector ETF</div>
-              <div className="text-sm text-secondary-foreground">
-                $3,000 invested
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="font-medium text-primary">$3,750.00</div>
-              <div className="text-sm text-green-600">+25% YTD</div>
-            </div>
-          </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="font-medium text-primary">Real Estate Fund</div>
-              <div className="text-sm text-secondary-foreground">
-                $2,500 invested
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="font-medium text-primary">$3,125.00</div>
-              <div className="text-sm text-green-600">+25% YTD</div>
-            </div>
-          </div>
+          <InvestmentItem
+            name="S&P 500 Index Fund"
+            invested="$5,000 invested"
+            value="$6,250.00"
+            change="+25% YTD"
+          />
+          <InvestmentItem
+            name="Tech Sector ETF"
+            invested="$3,000 invested"
+            value="$3,750.00"
+            change="+25% YTD"
+          />
+          <InvestmentItem
+            name="Real Estate Fund"
+            invested="$2,500 invested"
+            value="$3,125.00"
+            change="+25% YTD"
+          />
         </div>
       </CardContent>
     </Card>
